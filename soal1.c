@@ -58,11 +58,19 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	res = pread(fd, buf, size, offset);
 	if (res == -1)
 		res = -errno;
+	
+	close(fd);
+	return res;
 }
 	
 	
-static int (*open) (const char *, struct fuse_file_info *)
+static int xmp_open(const char *, struct fuse_file_info *)
 {
+	int pdf;
+	int doc;
+	int txt;
+	
+	(void) fi;
 	
 }
 	
@@ -76,5 +84,6 @@ static struct fuse_operations xmp_oper =
 {
 	.getattr	= xmp_getattr,
 	.readdir	= xmp_readdir,
+	.read		= xmp_read,
 	.open		= xmp_open,
 };
