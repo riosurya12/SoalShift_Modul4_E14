@@ -40,7 +40,11 @@ static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_
 	break;	
 }
 	
-
+static int (*open) (const char *, struct fuse_file_info *)
+{
+	
+}
+	
 int main(int argc, char *argv[])
 {
 	umask(0);
