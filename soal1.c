@@ -48,8 +48,12 @@ static int xmp_read(const char *path, char *buf, size_t size, off_t offset,
 	
 	(void) fi;
 	fd = open(path, O_RDONLY);
-	if (fd == -1)
+	if (fd == 0)
 		return -errno;
+	
+	res = pread(fd, buf, size, offset);
+	if (res == -1)
+		res = -errno;
 }
 	
 	
