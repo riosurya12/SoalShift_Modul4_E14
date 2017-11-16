@@ -8,6 +8,8 @@
 #include <errno.h>
 #include <sys/time.h>
 
+static const char *dirpath = "/home/riosurya/modul4";
+
 static int xmp_getattr(const char *path, struct stat *stbuf)
 {
 	int res;
