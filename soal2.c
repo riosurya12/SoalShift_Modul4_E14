@@ -1,0 +1,20 @@
+#define FUSE_USE_VERSION 28
+#include <fuse.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <dirent.h>
+#include <errno.h>
+#include <sys/time.h>
+
+static int xmp_getattr(const char *path, struct stat *stbuf)
+{
+	int res;
+
+	res = lstat(path, stbuf);
+	if (res == -1)
+		return -errno;
+
+	return 0;
+}
