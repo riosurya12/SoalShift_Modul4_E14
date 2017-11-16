@@ -24,12 +24,14 @@ static int xmp_getattr(const char *path, struct stat *stbuf)
 static int xmp_readdir(const char *path, void *buf, fuse_fill_dir_t filler,
 		       off_t offset, struct fuse_file_info *fi)
 {
-	DIR *dp;
-	struct dirent *de;
 
-	(void) offset;
-	(void) fi;
-
+	char fpath[1000];
+   	if(strcmp(path,"/") == 0)
+        {
+          path=dirpath;
+          sprintf(fpath,"%s",path);
+        }
+          else sprintf(fpath, "%s%s",dirpath,path);
 	dp = opendir(path);
 	if (dp == NULL)
 		return -errno;
